@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المختبر العلمي الافتراضي</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Cairo Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+  <!-- Top Navbar -->
+  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-cyan-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur text-cyan-300 text-xl shadow-inner">
+          <i class="fa-solid fa-flask-vial"></i>
+        </div>
+        <div>
+          <h1 class="text-lg md:text-xl font-extrabold tracking-wide">المختبر العلمي الافتراضي</h1>
+          <p class="text-xs text-blue-100 opacity-90">منهاج العلوم التفاعلي - دولة قطر</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center bg-white/15 p-1 rounded-xl backdrop-blur gap-1">
+        <button onclick="switchTab('convection')" id="tab-btn-convection" class="nav-btn px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-blue-800 shadow">
+          <i class="fa-solid fa-arrows-spin ml-1 text-cyan-600"></i> تيارات الحمل الحراري
+        </button>
+        <button onclick="switchTab('insulation')" id="tab-btn-insulation" class="nav-btn px-4 py-2 rounded-lg text-sm font-bold transition-all hover:bg-white/20 text-white">
+          <i class="fa-solid fa-house-chimney ml-1 text-yellow-300"></i> العزل الحراري
+        </button>
+        <button onclick="switchTab('general')" id="tab-btn-general" class="nav-btn px-4 py-2 rounded-lg text-sm font-bold transition-all hover:bg-white/20 text-white">
+          <i class="fa-solid fa-vial-virus ml-1 text-pink-300"></i> المختبر العام
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto p-4 md:p-6 flex-1 w-full">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: CONVECTION CURRENTS (تيارات الحمل) -->
+    <!-- ========================================== -->
+    <section id="view-convection" class="space-y-8">
+      
+      <!-- Experiment Title Banner -->
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-cyan-100 text-cyan-800 mb-2">الوحدة الرابعة: الطاقة الحرارية</span>
+          <h2 class="text-2xl font-black text-slate-800">الدرس الرابع: ما تيارات الحمل الحراري؟</h2>
+          <p class="text-slate-600 text-sm mt-1">يصعد المائع الساخن الأقل كثافة للأعلى، بينما يهبط المائع البارد الأكثر كثافة للأسفل مسبباً تيار حمل حراري.</p>
+        </div>
+        <div class="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl p-3 text-amber-900 text-xs font-semibold">
+          <i class="fa-solid fa-triangle-exclamation text-lg text-amber-600"></i>
+          <span>الماء الساخن: تتباعد جسيماته، تقل كثافته ويرتفع.<br>الماء البارد: تتقارب جسيماته، تزداد كثافته ويهبط.</span>
+        </div>
+      </div>
+
+      <!-- SECTION 1: Basin Experiment -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-wrap items-center justify-between pb-4 mb-4 border-b border-slate-100 gap-3">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-black">1</span>
+              النشاط الأول: استقصاء تيارات الحمل في حوض ماء
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">شاهد حركة قطرات الحبر الملون أثناء صعودها وهبوطها ثم استقرارها حسب الكثافة</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="addConvectionDrop('red')" class="px-4 py-2 bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs md:text-sm font-bold rounded-xl shadow transition flex items-center gap-1.5">
+              <i class="fa-solid fa-fire-flame-curved"></i> إضافة قطرة حبر أحمر (ساخن)
+            </button>
+            <button onclick="addConvectionDrop('blue')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs md:text-sm font-bold rounded-xl shadow transition flex items-center gap-1.5">
+              <i class="fa-solid fa-snowflake"></i> إضافة قطرة حبر أزرق (بارد)
+            </button>
+            <button onclick="resetBasin()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 text-xs md:text-sm font-bold rounded-xl border border-slate-300 transition">
+              <i class="fa-solid fa-rotate-right ml-1"></i> إعادة ضبط
+            </button>
+          </div>
+        </div>
+
+        <!-- Simulation Arena -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
+          
+          <div class="lg:col-span-3 bg-slate-900 rounded-2xl p-4 shadow-inner relative overflow-hidden flex flex-col items-center justify-center min-h-[380px]">
+            
+            <!-- Dynamic Canvas Simulation -->
+            <canvas id="convectionCanvas" width="620" height="340" class="max-w-full h-auto bg-slate-950 rounded-xl shadow-lg border border-slate-800"></canvas>
+
+            <!-- Status Indicator Overlay -->
+            <div id="basinStatus" class="mt-3 text-xs font-bold text-slate-300 bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-700 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              جاهز لإضافة القطرات. اضغط على أزرار الحبر لمشاهدة الحركة ثم الاستقرار.
+            </div>
+          </div>
+
+          <!-- Explanation Sidebar -->
+          <div class="space-y-4">
+            <div class="bg-red-50 border-r-4 border-red-500 p-4 rounded-xl">
+              <h4 class="font-bold text-sm text-red-800 flex items-center gap-2">
+                <i class="fa-solid fa-arrow-up text-red-600"></i> الحبر الأحمر (فوق التسخين)
+              </h4>
+              <p class="text-xs text-red-700 mt-1 leading-relaxed">
+                يسخن الماء مباشرة فوق الكأس الساخن في الوسط، فتقل كثافته ويصعد للأعلى نحو السطح ويستقر هناك مكوناً تيار حمل صاعد.
+              </p>
+            </div>
+
+            <div class="bg-blue-50 border-r-4 border-blue-500 p-4 rounded-xl">
+              <h4 class="font-bold text-sm text-blue-800 flex items-center gap-2">
+                <i class="fa-solid fa-arrow-down text-blue-600"></i> الحبر الأزرق (على الأطراف)
+              </h4>
+              <p class="text-xs text-blue-700 mt-1 leading-relaxed">
+                الماء عند الأطراف أبرد، وبالتالي تزداد كثافته ويهبط تدريجياً إلى القاع ويستقر هناك مكوناً تيار حمل هابط.
+              </p>
+            </div>
+
+            <div class="bg-slate-100 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-center gap-2">
+              <i class="fa-solid fa-lightbulb text-amber-500 text-base"></i>
+              <span>الأسهم البيضاء الخافتة في الخلفية توضح مسار الدوران الكامل لتيار الحمل.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 2: Two Flasks Experiment -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-wrap items-center justify-between pb-4 mb-4 border-b border-slate-100 gap-3">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-black">2</span>
+              النشاط الثاني: تجربة قارورتي الماء (الدافئ والبارد)
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">اختبر ماذا يحدث عند وضع الماء البارد فوق الدافئ أو العكس وسحب الورقة الفاصلة</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="resetBottles()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 text-xs md:text-sm font-bold rounded-xl border border-slate-300 transition">
+              <i class="fa-solid fa-rotate-right ml-1"></i> إعادة ضبط القوارير
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Controls -->
+          <div class="space-y-4">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-2">اختر ترتيب القارورتين:</label>
+              <div class="space-y-2">
+                <label class="flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition hover:bg-blue-50/50 has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500">
+                  <input type="radio" name="bottleSetup" value="coldOnTop" checked onchange="setupBottles()" class="w-4 h-4 text-blue-600">
+                  <div class="text-xs">
+                    <p class="font-extrabold text-slate-800">قارورة باردة (أزرق) بالأعلى</p>
+                    <p class="text-slate-500">وقارورة دافئة (أحمر) بالأسفل</p>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition hover:bg-amber-50/50 has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:ring-1 has-[:checked]:ring-amber-500">
+                  <input type="radio" name="bottleSetup" value="warmOnTop" onchange="setupBottles()" class="w-4 h-4 text-amber-600">
+                  <div class="text-xs">
+                    <p class="font-extrabold text-slate-800">قارورة دافئة (أحمر) بالأعلى</p>
+                    <p class="text-slate-500">وقارورة باردة (أزرق) بالأسفل</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button id="pullCardBtn" onclick="pullBarrier()" class="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-hand"></i> اسحب الورقة المقواة الفاصلة
+            </button>
+
+            <!-- Observation Box -->
+            <div id="bottleObservation" class="bg-slate-100 p-4 rounded-xl border border-slate-200 min-h-[110px] flex items-center text-xs text-slate-700 leading-relaxed font-semibold">
+              اختر ترتيب القوارير ثم اضغط على زر "اسحب الورقة المقواة" لمشاهدة التيارات والتفاعل.
+            </div>
+          </div>
+
+          <!-- Interactive Bottles Visual -->
+          <div class="lg:col-span-2 bg-gradient-to-b from-slate-100 to-slate-200 rounded-2xl p-6 border border-slate-300 flex flex-col items-center justify-center min-h-[380px] relative">
+            
+            <!-- Two Flasks Rig (SVG) -->
+            <div class="relative w-44 h-80 flex flex-col items-center">
+              
+              <!-- Top Bottle -->
+              <div id="topBottle" class="w-28 h-36 rounded-t-3xl border-4 border-slate-400/80 bg-blue-500/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm">
+                <span id="topBottleLabel">بارد (أزرق)</span>
+                <!-- Particle Container -->
+                <div id="topParticles" class="absolute inset-0 pointer-events-none"></div>
+              </div>
+
+              <!-- Barrier / Card -->
+              <div id="barrierCard" class="w-36 h-2 bg-amber-800 border border-amber-950 z-20 rounded shadow transition-transform duration-700"></div>
+
+              <!-- Bottom Bottle -->
+              <div id="bottomBottle" class="w-28 h-36 rounded-b-3xl border-4 border-slate-400/80 bg-red-500/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm">
+                <span id="bottomBottleLabel">دافئ (أحمر)</span>
+                <!-- Particle Container -->
+                <div id="bottomParticles" class="absolute inset-0 pointer-events-none"></div>
+              </div>
+
+            </div>
+
+            <!-- Exchange Status Banner -->
+            <div id="exchangeBanner" class="hidden absolute top-4 bg-indigo-900/90 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg border border-indigo-700 animate-bounce flex items-center gap-2">
+              <i class="fa-solid fa-spinner animate-spin"></i>
+              <span>جاري تبادل السوائل وصعود الماء الدافئ...</span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: THERMAL INSULATION (العزل الحراري) -->
+    <!-- ========================================== -->
+    <section id="view-insulation" class="hidden space-y-8">
+      
+      <!-- Lesson Banner -->
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-2">الوحدة الرابعة: الطاقة الحرارية</span>
+          <h2 class="text-2xl font-black text-slate-800">استقصاء: ما مدى فاعلية الأنواع المختلفة من العوازل؟</h2>
+          <p class="text-slate-600 text-sm mt-1">اختبار أثر شكل السقف ونوع المادة العازلة في منع دخول الحرارة، مطابقة لنتائج التجربة في كتاب العلوم.</p>
+        </div>
+        <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-3 text-blue-900 text-xs font-semibold">
+          <i class="fa-solid fa-scale-balanced text-lg text-blue-600"></i>
+          <span>ضبط المتغيرات لضمان اختبار عادل:<br>نفس الوعاء، مسافة المصباح 5cm، درجة حرارة البداية 23°C.</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Controls Panel -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-5">
+          <h3 class="text-base font-extrabold text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-blue-600"></i> متغيرات الاستقصاء
+          </h3>
+
+          <!-- Investigation Part 1: Roof Shape -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-2">1. شكل السقف (المتغير المستقل):</label>
+            <select id="roofSelect" onchange="updateRigPreview()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs md:text-sm font-bold text-slate-800 focus:ring-2 focus:ring-blue-500">
+              <option value="none">الورق الحراري فقط (بدون سقف)</option>
+              <option value="flat">الورق الحراري مع السقف المسطّح</option>
+              <option value="pyramid">الورق الحراري مع السقف الهرمي</option>
+            </select>
+          </div>
+
+          <!-- Investigation Part 2: Insulation Material -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-2">2. المادة العازلة تحت السقف:</label>
+            <select id="insulationSelect" onchange="updateRigPreview()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs md:text-sm font-bold text-slate-800 focus:ring-2 focus:ring-blue-500">
+              <option value="air">بدون مادة عازلة (فراغ هواء فقط)</option>
+              <option value="plastic">بلاستيك</option>
+              <option value="bubble">فقاعات بلاستيكية (غلاف فقاعات)</option>
+              <option value="wood">خشب</option>
+            </select>
+          </div>
+
+          <!-- Duration and Run -->
+          <div class="pt-2 border-t border-slate-100">
+            <button id="heatBtn" onclick="runHeatingExperiment()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 active:scale-95 text-white font-extrabold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-lightbulb"></i> تشغيل مصباح التسخين (5 دقائق)
+            </button>
+          </div>
+
+          <!-- Sensor & Timer Readout -->
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center">
+              <span class="text-[11px] text-slate-500 font-bold block mb-1">المؤقت التنازلي</span>
+              <span id="insulationTimer" class="text-xl font-black text-slate-800 tracking-wider">05:00</span>
+            </div>
+            <div class="bg-rose-50 p-3 rounded-xl border border-rose-200 text-center">
+              <span class="text-[11px] text-rose-600 font-bold block mb-1">مستشعر الحرارة</span>
+              <span id="tempSensorDisplay" class="text-xl font-black text-rose-700">23 °C</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Simulation Apparatus Visual -->
+        <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col items-center justify-between min-h-[380px] relative overflow-hidden">
+          
+          <div class="w-full flex items-center justify-between text-xs font-bold text-slate-500 border-b border-slate-100 pb-2">
+            <span>منصة الاختبار الفيزيائي</span>
+            <span class="text-amber-600 flex items-center gap-1"><i class="fa-solid fa-arrows-up-down"></i> المسافة: 5 cm ثابتة</span>
+          </div>
+
+          <!-- Rig Model (SVG) -->
+          <div class="w-full flex flex-col items-center my-4">
+            
+            <!-- Lamp -->
+            <div class="flex flex-col items-center">
+              <div class="w-24 h-12 bg-slate-700 rounded-t-full border-2 border-slate-600 flex items-center justify-center shadow">
+                <i class="fa-solid fa-lightbulb text-2xl text-slate-400" id="lampBulbIcon"></i>
+              </div>
+              <div id="heatRays" class="h-10 w-28 flex justify-around opacity-0 transition-opacity duration-300">
+                <span class="w-0.5 h-full bg-gradient-to-b from-amber-400 to-transparent"></span>
+                <span class="w-0.5 h-full bg-gradient-to-b from-amber-400 to-transparent"></span>
+                <span class="w-0.5 h-full bg-gradient-to-b from-amber-400 to-transparent"></span>
+                <span class="w-0.5 h-full bg-gradient-to-b from-amber-400 to-transparent"></span>
+              </div>
+            </div>
+
+            <!-- Roof Area -->
+            <div id="roofGraphicContainer" class="w-56 flex flex-col items-center transition-all duration-300">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Container Box -->
+            <div class="w-52 h-36 bg-blue-50/70 border-4 border-slate-300 rounded-b-xl relative shadow-inner flex flex-col items-center justify-center">
+              <div class="absolute top-2 right-2 text-xs font-bold text-slate-400">داخل الوعاء</div>
+              
+              <!-- Sensor Probe -->
+              <div class="absolute left-4 top-0 bottom-4 w-2 bg-slate-400 rounded-full flex flex-col items-center justify-end">
+                <div class="w-4 h-4 rounded-full bg-rose-600 -mb-1 animate-pulse"></div>
+              </div>
+
+              <!-- Internal Temp Tag -->
+              <div class="bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-200 text-center shadow-sm">
+                <span class="text-[10px] text-slate-500 font-bold block">هواء الوعاء</span>
+                <span id="boxTempLive" class="text-lg font-black text-slate-800">23 °C</span>
+              </div>
+            </div>
+
+            <!-- Table Stand -->
+            <div class="w-72 h-3 bg-slate-800 rounded-full mt-1"></div>
+          </div>
+
+          <!-- Experiment Progress Note -->
+          <div id="insulationNote" class="w-full text-center text-xs font-semibold text-slate-500 py-1 bg-slate-50 rounded-lg">
+            قم باختيار نوع السقف ومادة العزل ثم ابدأ التسخين لملاحظة درجة الحرارة المسجلة.
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Recorded Data Tables (Matches Textbook Exactly) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Table 1: Roof Shapes -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <h4 class="text-sm font-extrabold text-slate-800 mb-3 flex items-center justify-between">
+            <span>القسم الأول: استقصاء شكل السقف (بدون عازل إضافي)</span>
+            <span class="text-xs font-normal text-slate-500">ص 216</span>
+          </h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-center text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                  <th class="p-2.5 text-right">السقف</th>
+                  <th class="p-2.5">عند البدء (C°)</th>
+                  <th class="p-2.5">بعد 5 دقائق (C°)</th>
+                  <th class="p-2.5">الارتفاع (C°)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-semibold text-slate-700">
+                <tr id="row-none" class="hover:bg-slate-50">
+                  <td class="p-2.5 text-right font-bold">الورق الحراري فقط</td>
+                  <td class="p-2.5">23</td>
+                  <td class="p-2.5" id="val-none-end">24</td>
+                  <td class="p-2.5 text-blue-600 font-bold" id="val-none-diff">1</td>
+                </tr>
+                <tr id="row-flat" class="hover:bg-slate-50">
+                  <td class="p-2.5 text-right font-bold">الورق الحراري مع السقف المسطح</td>
+                  <td class="p-2.5">23</td>
+                  <td class="p-2.5" id="val-flat-end">25</td>
+                  <td class="p-2.5 text-blue-600 font-bold" id="val-flat-diff">2</td>
+                </tr>
+                <tr id="row-pyramid" class="hover:bg-slate-50">
+                  <td class="p-2.5 text-right font-bold">الورق الحراري مع السقف الهرمي</td>
+                  <td class="p-2.5">23</td>
+                  <td class="p-2.5" id="val-pyramid-end">29</td>
+                  <td class="p-2.5 text-blue-600 font-bold" id="val-pyramid-diff">6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Table 2: Insulation Materials -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <h4 class="text-sm font-extrabold text-slate-800 mb-3 flex items-center justify-between">
+            <span>القسم الثاني: استقصاء مواد العزل</span>
+            <span class="text-xs font-normal text-slate-500">ص 217</span>
+          </h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-center text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                  <th class="p-2.5 text-right">المادة العازلة</th>
+                  <th class="p-2.5">قبل التسخين (C°)</th>
+                  <th class="p-2.5">بعد 5 دقائق (C°)</th>
+                  <th class="p-2.5">الارتفاع (C°)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-semibold text-slate-700">
+                <tr id="row-plastic" class="hover:bg-slate-50">
+                  <td class="p-2.5 text-right font-bold">البلاستيك</td>
+                  <td class="p-2.5">23</td>
+                  <td class="p-2.5" id="val-plastic-end">25</td>
+                  <td class="p-2.5 text-blue-600 font-bold" id="val-plastic-diff">2</td>
+                </tr>
+                <tr id="row-bubble" class="hover:bg-slate-50">
+                  <td class="p-2.5 text-right font-bold">الفقاعات البلاستيكية</td>
+                  <td class="p-2.5">23</td>
+                  <td class="p-2.5" id="val-bubble-end">27</td>
+                  <td class="p-2.5 text-blue-600 font-bold" id="val-bubble-diff">4</td>
+                </tr>
+                <tr id="row-wood" class="hover:bg-slate-50">
+                  <td class="p-2.5 text-right font-bold">الخشب</td>
+                  <td class="p-2.5">23</td>
+                  <td class="p-2.5" id="val-wood-end">27</td>
+                  <td class="p-2.5 text-blue-600 font-bold" id="val-wood-diff">4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: GENERAL LAB (المختبر العام) -->
+    <!-- ========================================== -->
+    <section id="view-general" class="hidden space-y-6">
+      
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <h2 class="text-xl font-black text-slate-800">مختبر الكواشف والرقم الهيدروجيني (pH)</h2>
+        <p class="text-slate-600 text-sm mt-1">اختبر تفاعل كواشف الأحماض والقواعد وأثرها على تغير ألوان المحاليل والمؤشرات.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+          <label class="block text-xs font-bold text-slate-700">اختر المحلول المراد اختباره:</label>
+          <select id="phSolutionSelect" onchange="resetPhTest()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold">
+            <option value="acid">حمض الهيدروكلوريك المخفف (حمضي - pH 2)</option>
+            <option value="water">ماء مقطر نقي (متعادل - pH 7)</option>
+            <option value="base">هيدروكسيد الصوديوم (قاعدي - pH 12)</option>
+          </select>
+
+          <button onclick="addUniversalIndicator()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition shadow active:scale-95">
+            <i class="fa-solid fa-eye-dropper ml-1"></i> إضافة قطرات الكاشف العام
+          </button>
+        </div>
+
+        <div class="md:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col items-center justify-center min-h-[300px]">
+          <!-- Beaker -->
+          <div class="w-32 h-44 border-4 border-t-0 border-slate-400 rounded-b-2xl relative overflow-hidden flex flex-col justify-end p-2 shadow-inner">
+            <div id="phLiquid" class="w-full h-32 bg-sky-200/60 rounded-b-xl transition-colors duration-700 flex items-center justify-center font-black text-xs text-slate-700">
+              محلول الاختبار
+            </div>
+          </div>
+          <div id="phResultText" class="mt-4 text-xs font-bold text-slate-600 bg-slate-100 px-4 py-2 rounded-xl">
+            أضف قطرات الكاشف لمشاهدة التغير اللوني وقراءة الرقم الهيدروجيني.
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500 font-semibold mt-auto">
+    تطبيق المختبر العلمي الافتراضي © مصمم وفق معايير منهاج العلوم والتجارب المدرسية.
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC -->
+  <!-- ========================================== -->
+  <script>
+    // ---------------------------------------------
+    // NAVIGATION LOGIC
+    // ---------------------------------------------
+    function switchTab(tabId) {
+      ['convection', 'insulation', 'general'].forEach(id => {
+        document.getElementById(`view-${id}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${id}`);
+        btn.classList.remove('bg-white', 'text-blue-800', 'shadow');
+        btn.classList.add('text-white', 'hover:bg-white/20');
+      });
+
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      activeBtn.classList.remove('text-white', 'hover:bg-white/20');
+      activeBtn.classList.add('bg-white', 'text-blue-800', 'shadow');
+
+      if (tabId === 'convection') {
+        drawBasinStatic();
+      }
+    }
+
+    // ---------------------------------------------
+    // TAB 1: CONVECTION CURRENTS (BASIN SIMULATION)
+    // ---------------------------------------------
+    const canvas = document.getElementById('convectionCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let isBasinLoopRunning = false;
+
+    // Draw Static Apparatus on Canvas
+    function drawBasinStatic() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Water body
+      ctx.fillStyle = 'rgba(14, 116, 144, 0.15)';
+      ctx.fillRect(80, 50, 460, 200);
+
+      // Basin Glass
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(75, 45);
+      ctx.lineTo(80, 250);
+      ctx.lineTo(540, 250);
+      ctx.lineTo(545, 45);
+      ctx.stroke();
+
+      // Water surface line
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 4]);
+      ctx.beginPath();
+      ctx.moveTo(82, 60);
+      ctx.lineTo(538, 60);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Hot water container underneath (Center)
+      ctx.fillStyle = '#ef4444';
+      ctx.beginPath();
+      ctx.moveTo(270, 255);
+      ctx.lineTo(260, 315);
+      ctx.lineTo(360, 315);
+      ctx.lineTo(350, 255);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#b91c1c';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px Cairo';
+      ctx.textAlign = 'center';
+      ctx.fillText('ماء ساخن', 310, 290);
+
+      // Supports on sides
+      ctx.fillStyle = '#64748b';
+      ctx.fillRect(100, 255, 30, 60);
+      ctx.fillRect(490, 255, 30, 60);
+
+      // Guide Convection Arrows (Background watermark)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = 2;
+      // Left loop
+      ctx.beginPath();
+      ctx.arc(220, 150, 60, Math.PI * 0.2, Math.PI * 1.8);
+      ctx.stroke();
+      // Right loop
+      ctx.beginPath();
+      ctx.arc(400, 150, 60, Math.PI * 1.2, Math.PI * 0.8, true);
+      ctx.stroke();
+
+      // Draw active particles
+      particles.forEach(p => {
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    class ConvectionParticle {
+      constructor(type) {
+        this.type = type;
+        this.radius = 5 + Math.random() * 2;
+        this.progress = 0;
+        this.isSettled = false;
+
+        if (type === 'red') {
+          this.color = '#ef4444';
+          // Starts near the center bottom (above hot source)
+          this.startX = 300 + (Math.random() * 20 - 10);
+          this.startY = 240;
+          this.targetX = (Math.random() > 0.5 ? 200 : 420) + (Math.random() * 60 - 30);
+          this.targetY = 70 + Math.random() * 15; // Settles at surface
+          this.speed = 0.008 + Math.random() * 0.004;
+        } else {
+          this.color = '#3b82f6';
+          // Starts near upper sides
+          this.startX = (Math.random() > 0.5 ? 140 : 480) + (Math.random() * 20 - 10);
+          this.startY = 75;
+          this.targetX = this.startX + (Math.random() * 30 - 15);
+          this.targetY = 240 - Math.random() * 12; // Settles at bottom
+          this.speed = 0.007 + Math.random() * 0.004;
+        }
+        this.x = this.startX;
+        this.y = this.startY;
+      }
+
+      update() {
+        if (!this.isSettled) {
+          this.progress += this.speed;
+          if (this.progress >= 1) {
+            this.progress = 1;
+            this.isSettled = true;
+          }
+
+          if (this.type === 'red') {
+            // Ascends in center, then curves toward sides
+            const currentY = this.startY + (this.targetY - this.startY) * this.progress;
+            const currentX = this.startX + (this.targetX - this.startX) * Math.pow(this.progress, 2);
+            this.x = currentX;
+            this.y = currentY;
+          } else {
+            // Descends along the side to bottom
+            const currentY = this.startY + (this.targetY - this.startY) * this.progress;
+            const currentX = this.startX + (this.targetX - this.startX) * this.progress;
+            this.x = currentX;
+            this.y = currentY;
+          }
+        }
+      }
+    }
+
+    function addConvectionDrop(type) {
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => {
+          particles.push(new ConvectionParticle(type));
+          if (!isBasinLoopRunning) {
+            isBasinLoopRunning = true;
+            basinAnimationLoop();
+          }
+        }, i * 180);
+      }
+
+      const statusEl = document.getElementById('basinStatus');
+      if (type === 'red') {
+        statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span> صعود الحبر الأحمر الأقل كثافة للأعلى واستقراره بالسطح...`;
+      } else {
+        statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping"></span> هبوط الحبر الأزرق الأكثر كثافة للأسفل واستقراره بالقاع...`;
+      }
+    }
+
+    function basinAnimationLoop() {
+      let anyMoving = false;
+      particles.forEach(p => {
+        p.update();
+        if (!p.isSettled) anyMoving = true;
+      });
+
+      drawBasinStatic();
+
+      if (anyMoving) {
+        requestAnimationFrame(basinAnimationLoop);
+      } else {
+        isBasinLoopRunning = false;
+      }
+    }
+
+    function resetBasin() {
+      particles = [];
+      drawBasinStatic();
+      document.getElementById('basinStatus').innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> تم إعادة ضبط الحوض. أضف قطرات جديدة.`;
+    }
+
+    // ---------------------------------------------
+    // TAB 1: SECTION 2 (TWO BOTTLES SIMULATION)
+    // ---------------------------------------------
+    let bottleBarrierPulled = false;
+    let bottleTimeout = null;
+
+    function setupBottles() {
+      bottleBarrierPulled = false;
+      clearTimeout(bottleTimeout);
+
+      const setup = document.querySelector('input[name="bottleSetup"]:checked').value;
+      const topB = document.getElementById('topBottle');
+      const botB = document.getElementById('bottomBottle');
+      const topL = document.getElementById('topBottleLabel');
+      const botL = document.getElementById('bottomBottleLabel');
+      const card = document.getElementById('barrierCard');
+      const banner = document.getElementById('exchangeBanner');
+      const obs = document.getElementById('bottleObservation');
+
+      card.style.transform = 'translateX(0)';
+      banner.classList.add('hidden');
+
+      if (setup === 'coldOnTop') {
+        topB.className = 'w-28 h-36 rounded-t-3xl border-4 border-slate-400/80 bg-blue-500/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm';
+        botB.className = 'w-28 h-36 rounded-b-3xl border-4 border-slate-400/80 bg-red-500/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm';
+        topL.innerText = 'بارد (أزرق)';
+        botL.innerText = 'دافئ (أحمر)';
+        obs.innerText = 'الحالة الحالية: الماء البارد الأكثر كثافة في الأعلى، والماء الدافئ الأقل كثافة في الأسفل. اضغط لسحب الورقة.';
+      } else {
+        topB.className = 'w-28 h-36 rounded-t-3xl border-4 border-slate-400/80 bg-red-500/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm';
+        botB.className = 'w-28 h-36 rounded-b-3xl border-4 border-slate-400/80 bg-blue-500/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm';
+        topL.innerText = 'دافئ (أحمر)';
+        botL.innerText = 'بارد (أزرق)';
+        obs.innerText = 'الحالة الحالية: الماء الدافئ الأقل كثافة في الأعلى، والماء البارد في الأسفل. اضغط لسحب الورقة.';
+      }
+    }
+
+    function pullBarrier() {
+      if (bottleBarrierPulled) return;
+      bottleBarrierPulled = true;
+
+      const card = document.getElementById('barrierCard');
+      card.style.transform = 'translateX(-120px)';
+
+      const setup = document.querySelector('input[name="bottleSetup"]:checked').value;
+      const topB = document.getElementById('topBottle');
+      const botB = document.getElementById('bottomBottle');
+      const topL = document.getElementById('topBottleLabel');
+      const botL = document.getElementById('bottomBottleLabel');
+      const banner = document.getElementById('exchangeBanner');
+      const obs = document.getElementById('bottleObservation');
+
+      if (setup === 'coldOnTop') {
+        // Exchange occurs!
+        banner.classList.remove('hidden');
+        banner.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> صعود الماء الدافئ وهبوط الماء البارد وتبادل الأماكن (3.5 ثانية)...`;
+        obs.innerText = 'يصعد الماء الدافئ (الأحمر) للأعلى لأنه أقل كثافة، ويهبط الماء البارد (الأزرق) للأسفل، ويظلان متبادلين لثوانٍ معدودة قبل الاختلاط.';
+
+        // Swap colors temporarily
+        topB.classList.remove('bg-blue-500/80');
+        topB.classList.add('bg-red-500/80');
+        topL.innerText = 'دافئ (صاعد)';
+
+        botB.classList.remove('bg-red-500/80');
+        botB.classList.add('bg-blue-500/80');
+        botL.innerText = 'بارد (هابط)';
+
+        // After 3.5s, mix into purple
+        bottleTimeout = setTimeout(() => {
+          banner.classList.add('hidden');
+          topB.className = 'w-28 h-36 rounded-t-3xl border-4 border-slate-400/80 bg-purple-600/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm';
+          botB.className = 'w-28 h-36 rounded-b-3xl border-4 border-slate-400/80 bg-purple-600/80 backdrop-blur transition-colors duration-1000 relative overflow-hidden shadow-inner flex flex-col items-center justify-center text-white font-black text-sm';
+          topL.innerText = 'مختلط (بنفسجي)';
+          botL.innerText = 'مختلط (بنفسجي)';
+          obs.innerText = 'النتيجة النهائية: بعد حدوث تيارات الحمل الحراري وتبادل السوائل، اختلط الماء الساخن والبارد تماماً وتكون لون بنفسجي متجانس.';
+        }, 3500);
+
+      } else {
+        // Warm on top: Stable, no convection occurs!
+        banner.classList.remove('hidden');
+        banner.innerHTML = `<i class="fa-solid fa-check"></i> استقرار الموائع بدون اختلاط`;
+        obs.innerText = 'الملاحظة: لم يحدث أي تيار حمل حراري لأن الماء الدافئ (الأقل كثافة) موجود بالفعل في الأعلى، والماء البارد (الأكثر كثافة) في الأسفل، فبقي كل سائل في مكانه دون امتزاج.';
+        setTimeout(() => banner.classList.add('hidden'), 2500);
+      }
+    }
+
+    function resetBottles() {
+      setupBottles();
+    }
+
+    // ---------------------------------------------
+    // TAB 2: THERMAL INSULATION EXPERIMENT
+    // ---------------------------------------------
+    // Exact Values matching Student Textbook Tables:
+    const roofData = {
+      'none':    { start: 23, end: 24, diff: 1 },
+      'flat':    { start: 23, end: 25, diff: 2 },
+      'pyramid': { start: 23, end: 29, diff: 6 }
+    };
+
+    const insulationData = {
+      'plastic': { start: 23, end: 25, diff: 2 },
+      'bubble':  { start: 23, end: 27, diff: 4 },
+      'wood':    { start: 23, end: 27, diff: 4 }
+    };
+
+    let heatInterval = null;
+    let isHeating = false;
+
+    function updateRigPreview() {
+      const roofType = document.getElementById('roofSelect').value;
+      const insType = document.getElementById('insulationSelect').value;
+      const container = document.getElementById('roofGraphicContainer');
+
+      let roofSvg = '';
+      if (roofType === 'none') {
+        roofSvg = `
+          <div class="w-52 h-2.5 bg-yellow-200 border border-yellow-400 rounded-sm shadow-sm flex items-center justify-center text-[9px] font-bold text-amber-900">
+            ورق حراري فقط
+          </div>
+        `;
+      } else if (roofType === 'flat') {
+        roofSvg = `
+          <div class="w-56 h-6 bg-slate-600 border border-slate-700 rounded-t flex items-center justify-center text-xs font-bold text-white shadow">
+            سقف مسطح
+          </div>
+          <div class="w-52 h-2 bg-yellow-200 border border-yellow-400"></div>
+        `;
+      } else if (roofType === 'pyramid') {
+        roofSvg = `
+          <div class="w-0 h-0 border-l-[112px] border-l-transparent border-r-[112px] border-r-transparent border-b-[40px] border-b-amber-700 filter drop-shadow"></div>
+          <div class="w-52 h-2 bg-yellow-200 border border-yellow-400"></div>
+        `;
+      }
+
+      // Add insulation layer if selected
+      let insLayer = '';
+      if (insType === 'plastic') {
+        insLayer = `<div class="w-48 h-3 bg-cyan-400/80 border border-cyan-500 rounded text-[9px] text-center text-slate-900 font-bold -mt-0.5">عازل بلاستيك</div>`;
+      } else if (insType === 'bubble') {
+        insLayer = `<div class="w-48 h-3 bg-slate-300/90 border border-slate-400 rounded text-[9px] text-center text-slate-900 font-bold -mt-0.5">غلاف فقاعات</div>`;
+      } else if (insType === 'wood') {
+        insLayer = `<div class="w-48 h-3 bg-amber-800 border border-amber-900 rounded text-[9px] text-center text-amber-100 font-bold -mt-0.5">عازل خشب</div>`;
+      }
+
+      container.innerHTML = roofSvg + insLayer;
+    }
+
+    function runHeatingExperiment() {
+      if (isHeating) return;
+      isHeating = true;
+
+      const roofType = document.getElementById('roofSelect').value;
+      const insType = document.getElementById('insulationSelect').value;
+      const btn = document.getElementById('heatBtn');
+      const bulb = document.getElementById('lampBulbIcon');
+      const rays = document.getElementById('heatRays');
+      const note = document.getElementById('insulationNote');
+      const timerEl = document.getElementById('insulationTimer');
+      const sensorEl = document.getElementById('tempSensorDisplay');
+      const boxTempEl = document.getElementById('boxTempLive');
+
+      // Determine target values
+      let startVal = 23;
+      let targetVal = 25; // default fallback
+
+      if (insType !== 'air') {
+        targetVal = insulationData[insType].end;
+      } else {
+        targetVal = roofData[roofType].end;
+      }
+
+      btn.disabled = true;
+      btn.classList.add('opacity-60');
+      bulb.classList.remove('text-slate-400');
+      bulb.classList.add('text-amber-400');
+      rays.classList.remove('opacity-0');
+      note.innerHTML = `<span class="text-amber-600 font-bold"><i class="fa-solid fa-spinner animate-spin"></i> جاري التسخين لمدة 5 دقائق افتراضية...</span>`;
+
+      let secondsLeft = 5; // Accelerated: 5 real seconds = 5 simulated mins
+      let currentTemp = startVal;
+      sensorEl.innerText = `${startVal} °C`;
+      boxTempEl.innerText = `${startVal} °C`;
+
+      heatInterval = setInterval(() => {
+        secondsLeft--;
+        timerEl.innerText = `0${secondsLeft}:00`;
+
+        // Smooth increment
+        const tempStep = (targetVal - startVal) / 5;
+        currentTemp += tempStep;
+        const roundedTemp = Math.round(currentTemp);
+        sensorEl.innerText = `${roundedTemp} °C`;
+        boxTempEl.innerText = `${roundedTemp} °C`;
+
+        if (secondsLeft <= 0) {
+          clearInterval(heatInterval);
+          isHeating = false;
+          btn.disabled = false;
+          btn.classList.remove('opacity-60');
+          bulb.classList.remove('text-amber-400');
+          bulb.classList.add('text-slate-400');
+          rays.classList.add('opacity-0');
+          timerEl.innerText = '00:00';
+          sensorEl.innerText = `${targetVal} °C`;
+          boxTempEl.innerText = `${targetVal} °C`;
+
+          note.innerHTML = `<span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check"></i> اكتملت التجربة. درجة حرارة الهواء النهائية: ${targetVal} °C (مقدار الارتفاع: ${targetVal - startVal} °C).</span>`;
+
+          highlightTableRow(roofType, insType);
+        }
+      }, 1000);
+    }
+
+    function highlightTableRow(roofType, insType) {
+      // Remove previous highlights
+      document.querySelectorAll('tr').forEach(tr => tr.classList.remove('bg-amber-100'));
+
+      if (insType !== 'air') {
+        const row = document.getElementById(`row-${insType}`);
+        if (row) row.classList.add('bg-amber-100');
+      } else {
+        const row = document.getElementById(`row-${roofType}`);
+        if (row) row.classList.add('bg-amber-100');
+      }
+    }
+
+    // ---------------------------------------------
+    // TAB 3: GENERAL LAB (ACID/BASE pH)
+    // ---------------------------------------------
+    function resetPhTest() {
+      const liquid = document.getElementById('phLiquid');
+      const text = document.getElementById('phResultText');
+      liquid.style.backgroundColor = 'rgba(186, 230, 253, 0.6)';
+      liquid.innerText = 'محلول الاختبار';
+      text.innerText = 'أضف قطرات الكاشف لمشاهدة التغير اللوني وقراءة الرقم الهيدروجيني.';
+    }
+
+    function addUniversalIndicator() {
+      const type = document.getElementById('phSolutionSelect').value;
+      const liquid = document.getElementById('phLiquid');
+      const text = document.getElementById('phResultText');
+
+      if (type === 'acid') {
+        liquid.style.backgroundColor = '#ef4444';
+        liquid.innerText = 'حمض قوي (pH 2)';
+        text.innerHTML = '<span class="text-red-700 font-bold">النتيجة: تحول لون الكاشف إلى الأحمر، مما يدل على وسط حمضي ذي رقم هيدروجيني منخفض (pH 2).</span>';
+      } else if (type === 'water') {
+        liquid.style.backgroundColor = '#22c55e';
+        liquid.innerText = 'متعادل (pH 7)';
+        text.innerHTML = '<span class="text-green-700 font-bold">النتيجة: تحول لون الكاشف إلى الأخضر، مما يدل على وسط متعادل (pH 7).</span>';
+      } else if (type === 'base') {
+        liquid.style.backgroundColor = '#8b5cf6';
+        liquid.innerText = 'قاعدي قوي (pH 12)';
+        text.innerHTML = '<span class="text-purple-700 font-bold">النتيجة: تحول لون الكاشف إلى البنفسجي، مما يدل على وسط قاعدي (قلوي) ذي رقم هيدروجيني مرتفع (pH 12).</span>';
+      }
+    }
+
+    // Initialize on window load
+    window.addEventListener('DOMContentLoaded', () => {
+      drawBasinStatic();
+      setupBottles();
+      updateRigPreview();
+    });
+  </script>
+</body>
+</html>
